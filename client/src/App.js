@@ -12,7 +12,7 @@ class App extends Component {
       .then(r => Promise.resolve(r))
       .then(r => r.json())
       .then(({users}) => {
-        this.setState({users})
+        this.setState({users: users})
       })
   }
 
