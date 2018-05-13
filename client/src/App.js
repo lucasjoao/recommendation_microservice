@@ -1,18 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import {DataScroller} from 'primereact/components/datascroller/DataScroller';
 
 class App extends Component {
+  state = {
+    users: []
+  }
+
+  componentDidMount() {
+    fetch('/data')
+      .then(r => Promise.resolve(r))
+      .then(r => r.json())
+      .then(({users}) => {
+        this.setState({users})
+      })
+  }
+
+  userTemplate(user) {
+    if (!user) {
+      return;
+    }
+
+    return (
+      <div>
+        {user.name}
+      </div>
+    );
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <DataScroller value={this.state.users} itemTemplate={this.userTemplate.bind(this)} rows={10}/>
       </div>
     );
   }
