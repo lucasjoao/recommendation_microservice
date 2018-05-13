@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 import {DataScroller} from 'primereact/components/datascroller/DataScroller';
+import {Button} from 'primereact/components/button/Button';
+
+import './App.css';
 
 class App extends Component {
   state = {
@@ -22,16 +25,21 @@ class App extends Component {
     }
 
     return (
-      <div>
-        {user.name}
+      <div className="Row">
+        <div>
+          {user.name}
+        </div>
+        <div>
+          <Button label="Recomendação de amigos" onClick={this.onClick} />
+        </div>
       </div>
     );
   }
 
   render() {
     return (
-      <div>
-        <DataScroller value={this.state.users} itemTemplate={this.userTemplate.bind(this)} rows={10}/>
+      <div className="App">
+        <DataScroller value={this.state.users} itemTemplate={this.userTemplate.bind(this)} rows={10} header="Clique para ver as recomendações"/>
       </div>
     );
   }
