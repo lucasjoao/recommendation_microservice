@@ -10,9 +10,8 @@ app.get('/data', (req, res) => {
 app.get('/recommendations', (req, res) => {
   const id = req.query.id;
   // TODO: retornar json com possiveis amigos
-  // TODO: por enquanto ha erro aqui
-  let u = JSON.parse(users)
-  let user = u.find(user => { return u.id == id })
+  // TODO: por enquanto ha erro aqui, principalmente no send
+  let user = users.find(users => users.id == id)
   console.log(user)
   res.send(users);
 })
