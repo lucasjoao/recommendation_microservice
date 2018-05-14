@@ -10,7 +10,8 @@ class App extends Component {
   state = {
     users: [],
     selectedUser: undefined,
-    visible: false
+    visible: false,
+    recommendations: undefined
   }
 
   componentDidMount() {
@@ -22,8 +23,22 @@ class App extends Component {
       })
   }
 
-  onHide(event) {
+  getRecommendations(id) {
+    fetch(`/recommendations?id=${id}`)
+      .then(r => Promise.resolve(r))
+      .then(r => r.json())
+      .then(({recommendations}) => {
+        this.setState({recommendations: recommendations})
+      })
+  }
+
+  onHide(e) {
     this.setState({visible: false})
+  }
+
+  showDialog(user, e) {
+    this.setState({selectedUser: user, visible: true});
+    this.getRecommendations(user.id);
   }
 
   userTemplate(user) {
@@ -37,7 +52,8 @@ class App extends Component {
           {user.name}
         </div>
         <div>
-          <Button label="Recomendação de amigos" onClick={(e) => this.setState({selectedUser: user, visible: true})} />
+          <Button label="Recomendação de amigos"
+            onClick={(e) => this.showDialog(user, e)} />
         </div>
       </div>
     );
@@ -46,9 +62,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <DataScroller value={this.state.users} itemTemplate={this.userTemplate.bind(this)} rows={10} header="Clique para ver as recomendações"/>
-        <Dialog header="Amigos sugeridos" visible={this.state.visible} modal={true} onHide={this.onHide}>
-          Teste
+        <DataScroller value={this.state.users}
+            itemTemplate={this.userTemplate.bind(this)}
+            rows={10} header="Clique para ver as recomendações"/>
+
+        {/* FIXME: make open modal */}
+        <Dialog header="Amigos sugeridos" visible={this.state.visible}
+                modal={true} onHide={this.onHide}>
+            {
+              this.selectedUser && this.recommendations !== undefined && (
+                <div>
+                  {/* TODO: fazer aparecer lista de recomendações */}
+                  {this.state.recommendations}
+                </div>
+              )
+            }
         </Dialog>
       </div>
     );
