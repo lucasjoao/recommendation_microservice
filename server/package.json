@@ -6,6 +6,7 @@
   "scripts": {
     "bbn": "babel-node src/app.js",
     "s": "nodemon --exec npm run bbn",
+    "build": "babel src -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
