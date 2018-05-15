@@ -8,12 +8,21 @@ app.get('/data', (req, res) => {
 })
 
 app.get('/recommendations', (req, res) => {
-  const id = req.query.id;
-  // TODO: retornar json com possiveis amigos
-  // TODO: por enquanto ha erro aqui, principalmente no send
-  let user = users.find(users => users.id == id)
-  console.log(user)
-  res.send(users);
+  const id = req.query.id - 1;
+  let u = ['Alfred', 'Bob', 'Cold', 'Dumb', 'Elliot',
+           'Frank', 'Geralt', 'Host'];
+  let recommendations = []
+  for (let i = 0; i < 2; i++) {
+    let random = Math.floor(Math.random() * 8);
+    if (u[id] != u[random] && !recommendations.includes(u[random])) {
+      recommendations.push(u[random]);
+    }
+  }
+  let result = {
+    "recommendations": recommendations
+  }
+  let result_json = JSON.stringify(result);
+  res.send(result_json);
 })
 
 app.listen(3001, () => console.log('localhost:3001. Check this!'));

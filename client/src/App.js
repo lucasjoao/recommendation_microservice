@@ -9,7 +9,7 @@ import './App.css';
 class App extends Component {
   state = {
     users: [],
-    selectedUser: undefined,
+    selectedUser: undefined, // TODO: verificar necessidade dessa variavel
     visible: false,
     recommendations: undefined
   }
@@ -70,12 +70,15 @@ class App extends Component {
         <Dialog header="Amigos sugeridos" visible={this.state.visible}
                 modal={true} onHide={this.onHide}>
             {
-              this.selectedUser && this.recommendations !== undefined && (
-                <div>
-                  {/* TODO: fazer aparecer lista de recomendações */}
-                  {this.state.recommendations}
-                </div>
-              )
+                this.state.recommendations !== undefined &&
+                (<div>
+                  <ul>
+                    <li>{this.state.recommendations[0]}</li>
+                  </ul>
+                  <ul>
+                    <li>{this.state.recommendations[1]}</li>
+                  </ul>
+                </div>)
             }
         </Dialog>
       </div>

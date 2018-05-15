@@ -2,71 +2,35 @@
   "users": [
     {
       "id": 1,
-      "name": "Alfred",
-      "friends_id": [
-        {
-          "id": 2
-        },
-        {
-          "id": 3
-        }
-      ]
+      "name": "Alfred"
     },
     {
       "id": 2,
-      "name": "Bob",
-      "friends_id": [
-        {
-          "id": 3
-        },
-        {
-          "id": 4
-        }
-      ]
+      "name": "Bob"
     },
     {
       "id": 3,
-      "name": "Cold",
-      "friends_id": [
-        {
-          "id": 4
-        },
-        {
-          "id": 5
-        }
-      ]
+      "name": "Cold"
     },
     {
       "id": 4,
-      "name": "Dumb",
-      "friends_id": [
-        {
-          "id": 5
-        },
-        {
-          "id": 6
-        }
-      ]
+      "name": "Dumb"
     },
     {
       "id": 5,
-      "name": "Elliot",
-      "friends_id": []
+      "name": "Elliot"
     },
     {
       "id": 6,
-      "name": "Frank",
-      "friends_id": []
+      "name": "Frank"
     },
     {
       "id": 7,
-      "name": "Geralt",
-      "friends_id": []
+      "name": "Geralt"
     },
     {
       "id": 8,
-      "name": "Host",
-      "friends_id": []
+      "name": "Host"
     }
   ]
 }
