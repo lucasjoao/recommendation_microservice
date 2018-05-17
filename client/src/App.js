@@ -52,7 +52,7 @@ class App extends Component {
           {user.name}
         </div>
         <div>
-          <Button label="Recomendação de amigos"
+          <Button label="Friend suggestions"
             onClick={(e) => this.showDialog(user, e)} />
         </div>
       </div>
@@ -64,10 +64,10 @@ class App extends Component {
       <div className="App">
         <DataScroller value={this.state.users}
             itemTemplate={this.userTemplate.bind(this)}
-            rows={10} header="Clique para ver as recomendações"/>
+            rows={10} header=""/>
 
         {/* FIXME: make open modal */}
-        <Dialog header="Amigos sugeridos" visible={this.state.visible}
+        <Dialog header="Suggestions" visible={this.state.visible}
                 modal={true} onHide={this.onHide}>
             {
                 this.state.recommendations !== undefined &&
