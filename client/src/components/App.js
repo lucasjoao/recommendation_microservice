@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {Button} from 'primereact/components/button/Button';
 
+import 'primereact/resources/themes/voclain/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'font-awesome/css/font-awesome.css';
+
 import Recommendations from "./Recommendations";
 
 class App extends Component {
