@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
+import {Toolbar} from 'primereact/components/toolbar/Toolbar';
 import {Button} from 'primereact/components/button/Button';
 
 import 'primereact/resources/themes/voclain/theme.css';
@@ -18,6 +19,7 @@ class App extends Component {
 
     this.allUsers = this.allUsers.bind(this);
     this.specificUser = this.specificUser.bind(this);
+    this.home = this.home.bind(this);
   }
 
   possibleActions = {
@@ -31,6 +33,7 @@ class App extends Component {
 
     return (
       <div>
+        {this.menu()}
         {content}
       </div>
     );
@@ -64,6 +67,20 @@ class App extends Component {
 
   specificUser() {
     this.setState({running: this.possibleActions.SPECIFIC})
+  }
+
+  home() {
+    this.setState({running: this.possibleActions.NOTHING})
+  }
+
+  menu() {
+    return (
+      <Toolbar>
+        <div>
+          <Button label="Home" onClick={this.home} />
+        </div>
+      </Toolbar>
+    )
   }
 }
 
