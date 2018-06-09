@@ -10,6 +10,8 @@ import 'font-awesome/css/font-awesome.css';
 
 import Recommendations from "./Recommendations";
 
+import "../css/App.css";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +55,7 @@ class App extends Component {
 
   welcome() {
     return (
-      <div>
+      <div className="center">
         <h3>Welcome to the friends recommendations system!</h3>
         <Button label="All users" onClick={this.allUsers} />
         <Button label="Specific user" onClick={this.specificUser} />
@@ -77,9 +79,9 @@ class App extends Component {
     return (
       <Toolbar>
         <div>
-          Friends recommendations system
+          <div className="center">Friends recommendations system</div>
 
-          <Button className="ui-toolbar-group-right"
+          <Button className="ui-toolbar-group-left"
                   label="Home"
                   onClick={this.home} />
         </div>
