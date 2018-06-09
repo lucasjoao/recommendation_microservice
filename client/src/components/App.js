@@ -77,7 +77,11 @@ class App extends Component {
     return (
       <Toolbar>
         <div>
-          <Button label="Home" onClick={this.home} />
+          Friends recommendations system
+
+          <Button className="ui-toolbar-group-right"
+                  label="Home"
+                  onClick={this.home} />
         </div>
       </Toolbar>
     )
