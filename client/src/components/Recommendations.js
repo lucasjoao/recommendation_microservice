@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class Recommendations extends Component {
   render() {
     return (
-      <div className="center">{this.props.type}</div>
+      <div className="text-center">{this.props.type}</div>
     )
   }
 }

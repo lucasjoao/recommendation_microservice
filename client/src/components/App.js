@@ -8,6 +8,7 @@ import 'primereact/resources/themes/voclain/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'font-awesome/css/font-awesome.css';
 
+import SelectUser from "./SelectUser";
 import Recommendations from "./Recommendations";
 
 import "../css/App.css";
@@ -46,8 +47,9 @@ class App extends Component {
       case this.possibleActions.NOTHING:
         return this.welcome();
       case this.possibleActions.ALL:
-      case this.possibleActions.SPECIFIC:
         return <Recommendations type={running}/>;
+      case this.possibleActions.SPECIFIC:
+        return <SelectUser/>;
       default:
         return <h4>Problems!</h4>
     }
@@ -55,7 +57,7 @@ class App extends Component {
 
   welcome() {
     return (
-      <div className="center">
+      <div className="text-center">
         <h3>Welcome to the friends recommendations system!</h3>
         <Button label="All users" onClick={this.allUsers} />
         <Button label="Specific user" onClick={this.specificUser} />
@@ -79,7 +81,7 @@ class App extends Component {
     return (
       <Toolbar>
         <div>
-          <div className="center">Friends recommendations system</div>
+          <div className="text-center">Friends recommendations system</div>
 
           <Button className="ui-toolbar-group-left"
                   label="Home"
