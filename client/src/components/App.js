@@ -47,7 +47,7 @@ class App extends Component {
       case this.possibleActions.NOTHING:
         return this.welcome();
       case this.possibleActions.ALL:
-        return <Recommendations type={running}/>;
+        return <Recommendations user_id={running}/>;
       case this.possibleActions.SPECIFIC:
         return <SelectUser/>;
       default:

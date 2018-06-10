@@ -15,7 +15,7 @@ class SelectUser extends Component {
 
   nextPage() {
     return (
-      <Recommendations type={this.state.user_id}/>
+      <Recommendations user_id={this.state.user_id}/>
     );
   }
 
