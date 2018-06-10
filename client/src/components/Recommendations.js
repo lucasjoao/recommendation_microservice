@@ -14,7 +14,7 @@ class Recommendations extends Component {
   }
 
   componentDidMount() {
-    this.setState({suggestions: [this.props.user_id, this.props.user_id]});
+    this.setState({suggestions: [this.props.userId, this.props.userId]});
   }
 
   rowTemplate(suggestion) {
@@ -30,7 +30,7 @@ class Recommendations extends Component {
   }
 
   render() {
-    let header = "Friends suggestions to user with id " + this.props.user_id;
+    let header = "Friends suggestions to user with id " + this.props.userId;
 
     return (
       <div className="text-center top-space">
@@ -44,7 +44,7 @@ class Recommendations extends Component {
 }
 
 Recommendations.propTypes = {
-  user_id: PropTypes.string.isRequired
+  userId: PropTypes.string.isRequired
 }
 
 export default Recommendations;

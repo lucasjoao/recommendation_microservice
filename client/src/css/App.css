@@ -9,3 +9,11 @@
 .top-space {
   margin-top: 2em;
 }
+
+.little-top-space {
+  margin-top: 0.5em;
+}
+
+.little-left-space {
+  margin-left: 0.5em;
+}

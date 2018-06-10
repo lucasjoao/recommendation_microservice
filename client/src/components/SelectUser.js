@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 
 import {Button} from 'primereact/components/button/Button';
 import {InputText} from 'primereact/components/inputtext/InputText';
+
 import Recommendations from './Recommendations';
 
 class SelectUser extends Component {
   constructor() {
     super();
     this.state = {
-      user_id: '',
+      userId: '',
       buttonClicked: false
     }
   }
 
   nextPage() {
     return (
-      <Recommendations user_id={this.state.user_id}/>
+      <Recommendations userId={this.state.userId}/>
     );
   }
 
@@ -29,7 +30,7 @@ class SelectUser extends Component {
 
           <InputText placeholder="User id" type="text"
                      onChange={(e) =>
-                                this.setState({user_id: e.target.value})}/>
+                                this.setState({userId: e.target.value})}/>
         </div>
       </div>
     );

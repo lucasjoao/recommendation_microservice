@@ -9,7 +9,7 @@ import 'primereact/resources/primereact.min.css';
 import 'font-awesome/css/font-awesome.css';
 
 import SelectUser from "./SelectUser";
-import Recommendations from "./Recommendations";
+import AllUsers from './AllUsers';
 
 import "../css/App.css";
 
@@ -47,7 +47,7 @@ class App extends Component {
       case this.possibleActions.NOTHING:
         return this.welcome();
       case this.possibleActions.ALL:
-        return <Recommendations user_id={running}/>;
+        return <AllUsers/>;
       case this.possibleActions.SPECIFIC:
         return <SelectUser/>;
       default:
