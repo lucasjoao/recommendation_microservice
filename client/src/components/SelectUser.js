@@ -21,7 +21,7 @@ class SelectUser extends Component {
 
   search() {
     return (
-      <div className="block-center">
+      <div className="block-center top-space">
         <h3>Fill with the user's id</h3>
         <div className="ui-inputgroup">
           <Button label="Search"
