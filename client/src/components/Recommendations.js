@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {DataScroller} from 'primereact/components/datascroller/DataScroller';
 
+import service from '../services/service';
+
 class Recommendations extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,10 @@ class Recommendations extends Component {
   }
 
   componentDidMount() {
-    this.setState({suggestions: [this.props.userId, this.props.userId]});
+    service.getSuggestions(this.props.id)
+      .then(({suggestions}) => {
+        this.setState({suggestions: suggestions})
+      })
   }
 
   rowTemplate(suggestion) {
