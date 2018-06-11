@@ -12,12 +12,17 @@ import SelectUser from "./SelectUser";
 import AllUsers from './AllUsers';
 
 import "../css/App.css";
+import dataOAuth2 from '../utils/dataOAuth2';
+import Problem from './Problem';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      running: this.props.action
+      running: this.props.action,
+      googleApiReady: false,
+      login: this.loginState.NO,
+      googleAuth: undefined
     }
 
     this.allUsers = this.allUsers.bind(this);
@@ -25,10 +30,27 @@ class App extends Component {
     this.home = this.home.bind(this);
   }
 
+  loginState = {
+    NO: 0,
+    DOING: 1,
+    YES: 2
+  }
+
   possibleActions = {
     NOTHING: "nothing",
     ALL: "all",
     SPECIFIC: "specific"
+  }
+
+  componentDidMount() {
+    this.props.gapi.load('client:auth2', () => {
+      this.props.gapi.client.init(dataOAuth2).then(() => {
+        const googleAuth = this.props.gapi.auth2.getAuthInstance()
+        googleAuth.isSignedIn.listen(this.refreshLoginState)
+        googleAuth.disconnect()
+        this.setState({googleAuth, googleApiReady: true})
+      })
+    })
   }
 
   render() {
@@ -43,15 +65,23 @@ class App extends Component {
   }
 
   defineContent(running) {
-    switch (running) {
-      case this.possibleActions.NOTHING:
-        return this.welcome();
-      case this.possibleActions.ALL:
-        return <AllUsers/>;
-      case this.possibleActions.SPECIFIC:
-        return <SelectUser/>;
-      default:
-        return <h4>Problems!</h4>
+    if (this.state.login === this.loginState.YES) {
+      switch (running) {
+        case this.possibleActions.NOTHING:
+          return this.welcome();
+        case this.possibleActions.ALL:
+          return <AllUsers/>;
+        case this.possibleActions.SPECIFIC:
+          return <SelectUser/>;
+        default:
+          return <Problem msg="Problems after authentication"/>;
+      }
+    } else if (this.state.login === this.loginState.NO) {
+
+    } else if (this.state.login === this.loginState.DOING) {
+
+    } else {
+      return <Problem msg="Problems before authentication" />
     }
   }
 
