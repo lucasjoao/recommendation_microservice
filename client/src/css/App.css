@@ -17,3 +17,7 @@
 .little-left-space {
   margin-left: 0.5em;
 }
+
+.error {
+  color: red;
+}

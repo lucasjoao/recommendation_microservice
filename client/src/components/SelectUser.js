@@ -10,7 +10,18 @@ class SelectUser extends Component {
     super();
     this.state = {
       userId: '',
-      buttonClicked: false
+      buttonClicked: false,
+      error: false
+    }
+
+    this.checkInput = this.checkInput.bind(this);
+  }
+
+  checkInput() {
+    if (this.state.userId.length > 0) {
+      this.setState({buttonClicked: true});
+    } else {
+      this.setState({error: true});
     }
   }
 
@@ -26,7 +37,7 @@ class SelectUser extends Component {
         <h3>Fill with the user's id</h3>
         <div className="ui-inputgroup">
           <Button label="Search"
-                  onClick={() => this.setState({buttonClicked: true})}/>
+                  onClick={this.checkInput}/>
 
           <InputText placeholder="User id" type="text"
                      onChange={(e) =>
@@ -36,8 +47,22 @@ class SelectUser extends Component {
     );
   }
 
+  problem() {
+    let text = "Invalid input or user doesn't exist";
+    return (
+      <div className="text-center error">
+        <h3>{text}</h3>
+      </div>
+    )
+  }
+
   render() {
-    let content = (this.state.buttonClicked ? this.nextPage() : this.search());
+    let content;
+    if (this.state.error) {
+      content = this.problem();
+    } else {
+      content = (this.state.buttonClicked ? this.nextPage() : this.search());
+    }
 
     return (
       <div>
