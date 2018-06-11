@@ -45,7 +45,7 @@ class AllUsers extends Component {
     } else {
       // XXX: pegar fausto lista com todos os usuarios
       // XXX: se der ruim, entao mostrar mensagem estilo prox linha
-      if (this.state.users.length == 0) {
+      if (this.state.users.length === 0) {
         return (
           <Problem msg="Error when connect with other microservice" />
         )
