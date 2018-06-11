@@ -5,6 +5,7 @@ import {Button} from 'primereact/components/button/Button';
 
 import Recommendations from './Recommendations';
 import service from '../services/service';
+import Problem from './Problem';
 
 class AllUsers extends Component {
   constructor() {
@@ -12,17 +13,11 @@ class AllUsers extends Component {
     this.state = {
       users: [],
       buttonClicked: false,
-      selectedUser: undefined
+      selectedUser: undefined,
+      useFakeData: undefined
     }
 
     this.rowTemplate = this.rowTemplate.bind(this);
-  }
-
-  componentDidMount() {
-    service.allUsers()
-      .then(({users}) => {
-        this.setState({users: users})
-      })
   }
 
   rowTemplate(user) {
@@ -42,6 +37,21 @@ class AllUsers extends Component {
   }
 
   firstPage() {
+    if (this.state.useFakeData) {
+      service.allUsers()
+        .then(({users}) => {
+          this.setState({users: users})
+      })
+    } else {
+      // XXX: pegar fausto lista com todos os usuarios
+      // XXX: se der ruim, entao mostrar mensagem estilo prox linha
+      if (this.state.users.length == 0) {
+        return (
+          <Problem msg="Error when connect with other microservice" />
+        )
+      }
+    }
+
     let header = "Select the user to get friends recommendations";
     return (
       <div className="text-center top-space">
@@ -59,8 +69,27 @@ class AllUsers extends Component {
     );
   }
 
+  askWhatUse() {
+    return (
+      <div className="text-center top-space">
+        <h4>
+          Do you want to use fake data or connect with other microservice?
+        </h4>
+        <Button label="Fake"
+                onClick={() => this.setState({useFakeData: true})}/>
+        <Button label="Other microservice"
+                onClick={() => this.setState({useFakeData: false})}/>
+      </div>
+    )
+  }
+
   render() {
-    let content = (this.state.buttonClicked ? this.nextPage() : this.firstPage());
+    let content;
+    if (this.state.useFakeData == null) {
+      content = this.askWhatUse();
+    } else {
+      content = (this.state.buttonClicked ? this.nextPage() : this.firstPage());
+    }
 
     return (
       <div>

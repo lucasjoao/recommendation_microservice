@@ -4,6 +4,7 @@ import {Button} from 'primereact/components/button/Button';
 import {InputText} from 'primereact/components/inputtext/InputText';
 
 import Recommendations from './Recommendations';
+import Problem from './Problem';
 
 class SelectUser extends Component {
   constructor() {
@@ -18,11 +19,16 @@ class SelectUser extends Component {
   }
 
   checkInput() {
-    if (this.state.userId.length > 0) {
+    if (this.state.userId.length > 0 || this.userExist()) {
       this.setState({buttonClicked: true});
     } else {
       this.setState({error: true});
     }
+  }
+
+  userExist() {
+    // XXX: verificar fausto se usuario existe
+    return false;
   }
 
   nextPage() {
@@ -47,19 +53,10 @@ class SelectUser extends Component {
     );
   }
 
-  problem() {
-    let text = "Invalid input or user doesn't exist";
-    return (
-      <div className="text-center error">
-        <h3>{text}</h3>
-      </div>
-    )
-  }
-
   render() {
     let content;
     if (this.state.error) {
-      content = this.problem();
+      content = <Problem msg="Invalid input or user doesn't exist"/>;
     } else {
       content = (this.state.buttonClicked ? this.nextPage() : this.search());
     }
