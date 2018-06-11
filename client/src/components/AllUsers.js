@@ -4,6 +4,7 @@ import {DataScroller} from 'primereact/components/datascroller/DataScroller';
 import {Button} from 'primereact/components/button/Button';
 
 import Recommendations from './Recommendations';
+import service from '../services/service';
 
 class AllUsers extends Component {
   constructor() {
@@ -18,7 +19,10 @@ class AllUsers extends Component {
   }
 
   componentDidMount() {
-    this.setState({users: ['User0', 'User1', 'User2']});
+    service.allUsers()
+      .then(({users}) => {
+        this.setState({users: users})
+      })
   }
 
   rowTemplate(user) {
@@ -28,7 +32,7 @@ class AllUsers extends Component {
 
     return (
       <div>
-        {user}
+        {user.name}
         <Button className="little-left-space little-top-space"
                 label="Get"
                 onClick={() => this.setState({buttonClicked: true,
@@ -51,7 +55,7 @@ class AllUsers extends Component {
 
   nextPage() {
     return (
-      <Recommendations userId={this.state.selectedUser}/>
+      <Recommendations userId={this.state.selectedUser.id}/>
     );
   }
 
