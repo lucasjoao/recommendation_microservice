@@ -28,6 +28,9 @@ class App extends Component {
     this.allUsers = this.allUsers.bind(this);
     this.specificUser = this.specificUser.bind(this);
     this.home = this.home.bind(this);
+    this.refreshLoginState = this.refreshLoginState.bind(this);
+    this.doLogout = this.doLogout.bind(this);
+    this.doLogin = this.doLogin.bind(this);
   }
 
   loginState = {
@@ -45,10 +48,10 @@ class App extends Component {
   componentDidMount() {
     this.props.gapi.load('client:auth2', () => {
       this.props.gapi.client.init(dataOAuth2).then(() => {
-        const googleAuth = this.props.gapi.auth2.getAuthInstance()
-        googleAuth.isSignedIn.listen(this.refreshLoginState)
-        googleAuth.disconnect()
-        this.setState({googleAuth, googleApiReady: true})
+        const googleAuth = this.props.gapi.auth2.getAuthInstance();
+        googleAuth.isSignedIn.listen(this.refreshLoginState);
+        googleAuth.disconnect();
+        this.setState({googleAuth, googleApiReady: true});
       })
     })
   }
@@ -77,9 +80,13 @@ class App extends Component {
           return <Problem msg="Problems after authentication"/>;
       }
     } else if (this.state.login === this.loginState.NO) {
-
+      return (
+        <div className="text-center top-space">
+          <Button label="Sign in" onClick={this.doLogin}/>
+        </div>
+      );
     } else if (this.state.login === this.loginState.DOING) {
-
+      return <Problem msg="Doing login in other window..."/>
     } else {
       return <Problem msg="Problems before authentication" />
     }
@@ -88,9 +95,15 @@ class App extends Component {
   welcome() {
     return (
       <div className="text-center">
-        <h3>Welcome to the friends recommendations system!</h3>
-        <Button label="All users" onClick={this.allUsers} />
-        <Button label="Specific user" onClick={this.specificUser} />
+        <div>
+          <h3>Welcome to the friends recommendations system!</h3>
+          <Button label="All users" onClick={this.allUsers} />
+          <Button label="Specific user" onClick={this.specificUser} />
+        </div>
+        <div>
+          <h3>{this.state.user.w3.ig}, if you want sign out:</h3>
+          <Button label="Click here" onClick={this.doLogout} />
+        </div>
       </div>
     );
   }
@@ -120,10 +133,34 @@ class App extends Component {
       </Toolbar>
     )
   }
+
+  refreshLoginState(isLogged) {
+    if (isLogged) {
+      const user = this.state.googleAuth.currentUser.get();
+      const allowed = user.hasGrantedScopes(dataOAuth2.scope);
+      if (allowed) {
+        this.setState({user, login: this.loginState.YES});
+      } else {
+        this.setState({user: undefined, login: this.loginState.NO});
+      }
+    } else {
+      this.setState({user: undefined, login: this.loginState.NO});
+    }
+  }
+
+  doLogout() {
+    this.state.googleAuth.disconnect();
+  }
+
+  doLogin() {
+    this.state.googleAuth.signIn();
+    this.setState({login: this.loginState.DOING});
+  }
 }
 
 App.propTypes = {
-  action: PropTypes.string.isRequired
+  action: PropTypes.string.isRequired,
+  gapi: PropTypes.object
 }
 
 export default App;
