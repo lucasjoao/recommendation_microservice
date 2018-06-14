@@ -1,8 +1,16 @@
 import express from 'express'
+import path from 'path'
 import users from './dump_data.json'
 import * as db from './db'
 
 const app = express();
+
+// things necessary to run in production
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
 
 app.get('/connect', (req, res) => db.connect(res))
 
