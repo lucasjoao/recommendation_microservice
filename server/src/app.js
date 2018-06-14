@@ -1,8 +1,10 @@
 import express from 'express'
-import path from 'path'
 import users from './dump_data.json'
+import * as db from './db'
 
 const app = express();
+
+app.get('/connect', (req, res) => db.connect(res))
 
 // helper that get dump data when other microservice is down
 app.get('/allUsers', (req, res) => {

@@ -12,12 +12,15 @@ import SelectUser from "./SelectUser";
 import AllUsers from './AllUsers';
 
 import "../css/App.css";
+import service from '../services/service';
+import Problem from './Problem';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      running: this.props.action
+      running: this.props.action,
+      hasConnection: undefined
     }
 
     this.allUsers = this.allUsers.bind(this);
@@ -29,6 +32,12 @@ class App extends Component {
     NOTHING: "nothing",
     ALL: "all",
     SPECIFIC: "specific"
+  }
+
+  componentDidMount() {
+    service.connect()
+      .then(() => this.setState({hasConnection: true}))
+      .catch(() => this.setState({hasConnection: false}))
   }
 
   render() {
@@ -43,15 +52,19 @@ class App extends Component {
   }
 
   defineContent(running) {
-    switch (running) {
-      case this.possibleActions.NOTHING:
-        return this.welcome();
-      case this.possibleActions.ALL:
-        return <AllUsers/>;
-      case this.possibleActions.SPECIFIC:
-        return <SelectUser/>;
-      default:
-        return <h4>Problems!</h4>
+    if (this.state.hasConnection) {
+      switch (running) {
+        case this.possibleActions.NOTHING:
+          return this.welcome();
+        case this.possibleActions.ALL:
+          return <AllUsers/>;
+        case this.possibleActions.SPECIFIC:
+          return <SelectUser/>;
+        default:
+          return <h4>Problems!</h4>
+      }
+    } else {
+      return <Problem msg="Cannot connect with the database, press F5!"/>
     }
   }
 

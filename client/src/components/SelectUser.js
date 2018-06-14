@@ -19,15 +19,17 @@ class SelectUser extends Component {
   }
 
   checkInput() {
-    if (this.state.userId.length > 0 || this.userExist()) {
-      this.setState({buttonClicked: true});
-    } else {
-      this.setState({error: true});
-    }
+    // XXX: enquanto nao ha interacao com outro ms
+    // if (this.state.userId.length > 0 && this.userExist()) {
+    // this.setState({buttonClicked: true});
+    // } else {
+    this.setState({error: true});
+    // }
   }
 
   userExist() {
-    // XXX: verificar fausto se usuario existe
+    // XXX: verificar fausto se usuario existe -> http://m1.nathan.werlich.vms.ufsc.br:3001/searchById?id=
+    // XXX: add consulta no servidor e no service
     return false;
   }
 
