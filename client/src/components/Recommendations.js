@@ -16,6 +16,9 @@ class Recommendations extends Component {
   }
 
   componentDidMount() {
+    // XXX: verificar se ja tem sugestao no banco
+    // XXX: se ja tem, entao questiona usuario o que ele quer fazer, ver novas ou antigas
+    // XXX: sempre que ver novas, salva as sugestoes no banco
     service.getSuggestions(this.props.id)
       .then(({suggestions}) => {
         this.setState({suggestions: suggestions})
@@ -37,6 +40,7 @@ class Recommendations extends Component {
   render() {
     let header = "Friends suggestions to user with id " + this.props.userId;
 
+    // XXX: retornar antes do dataScroller dois componentes iguais, onde um serve para mostrar a lista de amigos que a pessoa ja possui e a outra serve para mostrar a lista de usuarios no sistema <-> fazer tanto para fake quanto para real
     return (
       <div className="text-center top-space">
         <DataScroller value={this.state.suggestions}

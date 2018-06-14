@@ -22,6 +22,7 @@ function connect(res) {
   )
 }
 
+// XXX: usar isso
 function save(res, id, ids) {
   const recommendation = new Recommendation({id: id, ids: ids})
   recommendation.save().then(
@@ -30,6 +31,7 @@ function save(res, id, ids) {
   )
 }
 
+// XXX: usar isso
 function searchAll(res) {
   Recommendation.find().then(
     (recommendations) => res.json(recommendations),

@@ -65,10 +65,8 @@ class AllUsers extends Component {
   }
 
   nextPage() {
-    // TODO: fazer verificacao com banco e questionar usuario
     return (
       <div>
-
         <Recommendations userId={this.state.selectedUser.id}/>
       </div>
     );
