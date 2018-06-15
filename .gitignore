@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# made by me, production things
+dist/
