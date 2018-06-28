@@ -1,8 +1,11 @@
 - prioridade alta
   - conectar com outros microserviços e limpar comentários relacionados a isso
   - fazer sugestões de amigos com dados reais
+  - salvar informações no banco
+  - verificar se já tem sugestão no banco e perguntar se usuário deseja usá-la
 - prioridade baixa
   - verificar se usuário está autenticado com microserviço de login
   - algoritmo de recomendação interessante que considere informações do usuário
   - adicionar testes
   - permitir que seja enviada mais recomendações sem repetir as que acabaram de ser enviadas
+  - fazer FriendsList e UsersList ser genérico

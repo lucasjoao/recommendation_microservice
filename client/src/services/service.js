@@ -13,8 +13,15 @@ const service = {
       .then(r => Promise.resolve(r))
       .then(r => r.json())
   ,
+  // get dump suggestions
   getSuggestions: (id) =>
     fetch(`/suggestions?id=${id}`)
+      .then(r => Promise.resolve(r))
+      .then(r => r.json())
+  ,
+  // get dump friends
+  getFriends: (id) =>
+    fetch(`/friends?id=${id}`)
       .then(r => Promise.resolve(r))
       .then(r => r.json())
   ,

@@ -83,4 +83,22 @@ app.get('/suggestions', (req, res) => {
   res.send(result_json);
 })
 
+// helper that get dump friends at json
+app.get('/friends', (req, res) => {
+  const id = req.query.id - 1;
+  let u = users.users;
+  let tmp = u[id].friends;
+  let names = [];
+
+  for (let i = 0; i < tmp.length; i++) {
+    names.push(u[tmp[i] - 1].name);
+  }
+
+  let result = {
+    "friends": names
+  }
+  let result_json = JSON.stringify(result);
+  res.send(result_json);
+})
+
 app.listen(3001, () => console.log('localhost:3001. Check this!'));

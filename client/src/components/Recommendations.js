@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import {DataScroller} from 'primereact/components/datascroller/DataScroller';
 
 import service from '../services/service';
+import FriendsList from './FriendsList';
+import UsersList from './UsersList';
 
 class Recommendations extends Component {
   constructor(props) {
@@ -40,9 +42,10 @@ class Recommendations extends Component {
   render() {
     let header = "Friends suggestions to user with id " + this.props.userId;
 
-    // XXX: retornar antes do dataScroller dois componentes iguais, onde um serve para mostrar a lista de amigos que a pessoa ja possui e a outra serve para mostrar a lista de usuarios no sistema <-> fazer tanto para fake quanto para real
     return (
       <div className="text-center top-space">
+        <UsersList />
+        <FriendsList userId={this.props.userId}/>
         <DataScroller value={this.state.suggestions}
                       itemTemplate={this.rowTemplate}
                       rows={10}
