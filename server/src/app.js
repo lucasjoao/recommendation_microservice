@@ -43,9 +43,9 @@ app.get('/realAllUsers', (req, res) => {
   // request.send();
 
   // BUG: try with fetch, doesnt work
-  fetch(url)
-    .then(data => console.log(data)) // test purpose
-    .then(data => res.send(data));
+  // fetch(url)
+  //   .then(data => console.log(data)) // test purpose
+  //   .then(data => res.send(data));
 
   // BUG: try with async, doesnt work
   // (async () => {
