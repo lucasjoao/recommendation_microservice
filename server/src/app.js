@@ -56,23 +56,26 @@ app.get('/realAllUsers', (req, res) => {
   // })();
 })
 
-// XXX: verificar se consigo usar um unico so para fake e para real
+// helper that get dump suggestions
 app.get('/suggestions', (req, res) => {
   const id = req.query.id - 1;
-  // XXX: def prox var como lista com todos os usuarios
-  let u = ['Alfred', 'Bob', 'Cold', 'Dumb', 'Elliot',
-           'Frank', 'Geralt', 'Host'];
-  let suggestions = []
-  // XXX: proximo for deve iterar o tamanho de u vezes
-  for (let i = 0; i < 4; i++) {
-    // XXX: gerar numero random dentro da faixa permitida
-    let random = Math.floor(Math.random() * 8);
-    // XXX: proximo if tbm deve checar se eles nao sao amigos
-    if (u[id] != u[random] && !suggestions.includes(u[random])) {
-      suggestions.push(u[random]);
+  let u = users.users;
+  let suggestions = [];
+
+  for (let i = 0; i < u.length; i++) {
+    let random = Math.floor(Math.random() * u.length);
+
+    if (u[id].id != u[random].id // not the same people
+        && !suggestions.includes(u[random].name) // new suggestion
+        && !u[id].friends.includes(u[random].id)) { // arent friends yet
+          suggestions.push(u[random].name);
     }
-    // XXX: add uma verificacao de que se ja tem x recomencadoes, entao para
+
+    if(suggestions.length == 3) {
+      break;
+    }
   }
+
   let result = {
     "suggestions": suggestions
   }

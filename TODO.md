@@ -1,5 +1,6 @@
 - prioridade alta
   - conectar com outros microserviços e limpar comentários relacionados a isso
+  - fazer sugestões de amigos com dados reais
 - prioridade baixa
   - verificar se usuário está autenticado com microserviço de login
   - algoritmo de recomendação interessante que considere informações do usuário

@@ -19,7 +19,7 @@ class Recommendations extends Component {
     // XXX: verificar se ja tem sugestao no banco
     // XXX: se ja tem, entao questiona usuario o que ele quer fazer, ver novas ou antigas
     // XXX: sempre que ver novas, salva as sugestoes no banco
-    service.getSuggestions(this.props.id)
+    service.getSuggestions(this.props.userId)
       .then(({suggestions}) => {
         this.setState({suggestions: suggestions})
       })

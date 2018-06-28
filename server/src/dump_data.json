@@ -2,35 +2,43 @@
   "users": [
     {
       "id": 1,
-      "name": "Alfred"
+      "name": "Alfred",
+      "friends": [2, 3, 8]
     },
     {
       "id": 2,
-      "name": "Bob"
+      "name": "Bob",
+      "friends": [1, 4, 5, 8]
     },
     {
       "id": 3,
-      "name": "Cold"
+      "name": "Cold",
+      "friends": [1, 8]
     },
     {
       "id": 4,
-      "name": "Dumb"
+      "name": "Dumb",
+      "friends": [2, 6, 8]
     },
     {
       "id": 5,
-      "name": "Elliot"
+      "name": "Elliot",
+      "friends": [2, 6, 8]
     },
     {
       "id": 6,
-      "name": "Frank"
+      "name": "Frank",
+      "friends": [4, 5, 8]
     },
     {
       "id": 7,
-      "name": "Geralt"
+      "name": "Geralt",
+      "friends": []
     },
     {
       "id": 8,
-      "name": "Host"
+      "name": "Host",
+      "friends": [1, 2, 3, 4, 5, 6]
     }
   ]
 }
