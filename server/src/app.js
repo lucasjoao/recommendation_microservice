@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'path'
+import fetch from 'node-fetch';
 import users from './dump_data.json'
 import * as db from './db'
 
@@ -17,6 +18,42 @@ app.get('/connect', (req, res) => db.connect(res))
 // helper that get dump data when other microservice is down
 app.get('/allUsers', (req, res) => {
   res.send(users);
+})
+
+// BUG: get real data from other microservice
+app.get('/realAllUsers', (req, res) => {
+  let url = 'http://m1.nathan.werlich.vms.ufsc.br:3001/searchAll';
+
+  // BUG: try with xmlhttprequest, doesnt work
+  // let XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+  // let request = new XMLHttpRequest();
+  // request.onreadystatechange = (e) => {
+  //   if (request.readyState !== 4) {
+  //     return;
+  //   }
+
+  //   if (request.status === 200) {
+  //     console.log('success', request.responseText);
+  //     res.send(request.responseText)
+  //   } else {
+  //     console.log('error', request.status);
+  //   }
+  // };
+  // request.open("GET", url);
+  // request.send();
+
+  // BUG: try with fetch, doesnt work
+  fetch(url)
+    .then(data => console.log(data)) // test purpose
+    .then(data => res.send(data));
+
+  // BUG: try with async, doesnt work
+  // (async () => {
+  //   let response = await fetch(url);
+  //   let data = await response.text();
+  //   console.log(data); // test purpose
+  //   res.send(data)
+  // })();
 })
 
 // XXX: verificar se consigo usar um unico so para fake e para real

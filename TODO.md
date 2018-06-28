@@ -1,4 +1,7 @@
-- verificar se usuário está autenticado com microserviço de login
-- algoritmo de recomendação interessante que considere informações do usuário
-- adicionar testes
-- permitir que seja enviada mais recomendações sem repetir as que acabaram de ser enviadas
+- prioridade alta
+  - conectar com outros microserviços e limpar comentários relacionados a isso
+- prioridade baixa
+  - verificar se usuário está autenticado com microserviço de login
+  - algoritmo de recomendação interessante que considere informações do usuário
+  - adicionar testes
+  - permitir que seja enviada mais recomendações sem repetir as que acabaram de ser enviadas
